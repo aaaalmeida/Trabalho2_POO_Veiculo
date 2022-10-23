@@ -1,0 +1,43 @@
+@startuml
+
+abstract class Veiculo{
+    # marca: String
+    # modelo: String
+    # anoFabricacao: int
+    # anoModelo: int
+    # preco: double
+}
+
+class Carro{
+    - qtdPortas: int
+}
+
+class Caminhao{
+    - capacidadeCarga: double
+} 
+
+class Onibus{
+    - qtdPassageiros: int
+    - qtdEixos: int
+}
+
+class Cliente{
+    - nome: String
+    - telefone: String
+    - CPF: String
+}
+
+class Venda{
+    - veiculo: Veiculo
+    - cliente: Cliente
+    - data: LocalDate
+    - preco: double
+}
+
+Veiculo <-- Carro
+Veiculo <-- Caminhao
+Veiculo <-- Onibus
+
+Cliente --* Venda: realiza
+Veiculo --* Venda: associado
+@enduml
