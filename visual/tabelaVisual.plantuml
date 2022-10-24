@@ -1,0 +1,97 @@
+@startuml tabelaVisualExpandida
+
+interface Fichario {
+    + {abstract} adiciona()
+    + {abstract} remove()
+    + {abstract} consulta()
+    + {abstract} relatorio()
+}
+
+abstract class Veiculo{
+    # marca: String
+    # modelo: String
+    # anoFabricacao: int
+    # anoModelo: int
+    # preco: double
+    # identificador: int
+}
+enum SituacaoVeiculo {
+    DISPONIVEL
+    ALUGADO
+    VENDIDO
+    MANUTENCAO
+}
+
+enum TipoVeiculo {
+    CARRO
+    ONIBUS
+    CAMINHAO
+}
+
+class Carro extends Veiculo {
+    - qtdPortas: int
+}
+
+class Caminhao extends Veiculo {
+    - capacidadeCarga: double
+}
+
+class Onibus extends Veiculo {
+    - qtdPassageiros: int
+    - qtdEixos: int
+}
+
+class Cliente{
+    - nome: String
+    - telefone: String
+    - CPF: String
+    - identificador: int
+}
+
+class Contrato{
+    # veiculo: Veiculo
+    # cliente: Cliente
+    # data: LocalDate
+    # preco: double
+    # identificador: int
+    # tipoContrato: TipoContrato
+}
+
+enum TipoVeiculo {
+    CARRO
+    ONIBUS
+    CAMINHAO
+}
+
+class Aluguel extends Contrato{
+    - dataDevolucao: LocalDate
+    - tempoAlugado: Period
+}
+
+class Venda extends Contrato {
+    - valorParcela: double
+    - qtdParcelas: QTDParcela
+}
+
+class FicharioVeiculo implements Fichario {
+    - listaVeiculos : ArrayList
+}
+
+class FicharioCliente implements Fichario {
+    - listaClientes : ArrayList
+}
+
+class FicharioContrato implements Fichario {
+    - listaContratos : ArrayList
+}
+
+Veiculo -- TipoVeiculo
+Veiculo -- SituacaoVeiculo
+
+FicharioVeiculo *-- Veiculo
+FicharioCliente *-- Cliente
+FicharioContrato *- Contrato
+
+Cliente --* Contrato: realiza
+Veiculo --* Contrato: associado
+@enduml
