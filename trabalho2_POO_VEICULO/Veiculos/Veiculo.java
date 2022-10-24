@@ -10,6 +10,7 @@ public abstract class Veiculo {
     protected int identificador; // indicador
     protected static int codigo = 0;
     protected SituacaoVeiculo situacaoVeiculo;
+
     protected TipoVeiculo tipoVeiculo;
 
     public Veiculo(String marca, String modelo, String placa,
@@ -100,5 +101,9 @@ public abstract class Veiculo {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public void setSituacaoVeiculo(SituacaoVeiculo situacaoVeiculo) {
+        this.situacaoVeiculo = situacaoVeiculo;
     }
 }

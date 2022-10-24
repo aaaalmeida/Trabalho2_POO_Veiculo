@@ -17,7 +17,8 @@ public class FicharioVeiculo implements Fichario {
         int anoFab, anoMod;
         double preco;
         Veiculo novoVeiculo = null;
-
+        
+        // scanner.skip("\n");
         System.out.println("\nDigite a placa do veiculo: ");
         placa = scanner.nextLine();
         System.out.println("Digite a marca do veiculo: ");
@@ -73,7 +74,7 @@ public class FicharioVeiculo implements Fichario {
     }
 
     public void remove() {
-        System.out.println("Digite o CODIGO IDENTIFICADOR do veiculo a ser removido:");
+        System.out.println("\nDigite o CODIGO IDENTIFICADOR do veiculo a ser removido:");
         int id;
         id = scanner.nextInt();
 
@@ -101,7 +102,7 @@ public class FicharioVeiculo implements Fichario {
 
     public void consulta() {
         int resp;
-        System.out.println("\nBuscar veiculo por [1]INDICE, [2] PLACA ou [3]IDENTIFICADOR? ");
+        System.out.println("\nBuscar Veiculo por [1]INDICE, [2] PLACA ou [3]IDENTIFICADOR? ");
         resp = scanner.nextInt();
         Veiculo veiculo = null;
 
@@ -116,11 +117,19 @@ public class FicharioVeiculo implements Fichario {
                     System.out.println("INDICE NÃO EXISTE");
                 }
                 break;
+
             case 2:
-                veiculo = buscaPlaca();
+                System.out.println("Digite a placa do Veiculo: ");
+                String placa;
+                placa = scanner.nextLine();
+                veiculo = buscaPlaca(placa);
                 break;
+
             default:
-                veiculo = buscaIDENT();
+                System.out.println("Digite o código IDENTIFICADOR do Veiculo: ");
+                int id;
+                id = scanner.nextInt();
+                veiculo = buscaIDENT(id);
                 break;
         }
 
@@ -132,11 +141,7 @@ public class FicharioVeiculo implements Fichario {
         System.out.println("Veiculo nao encontrado");
     };
 
-    public Veiculo buscaPlaca() {
-        System.out.println("Digite a placa do Veiculo: ");
-        String placa;
-        placa = scanner.nextLine();
-
+    public Veiculo buscaPlaca(String placa) {
         for (Veiculo veiculo : listaVeiculos)
             if (placa == veiculo.getPlaca())
                 return veiculo;
@@ -144,11 +149,7 @@ public class FicharioVeiculo implements Fichario {
         return null;
     }
 
-    public Veiculo buscaIDENT() {
-        System.out.println("Digite o código IDENTIFICADOR do Veiculo: ");
-        int id;
-        id = scanner.nextInt();
-
+    public Veiculo buscaIDENT(int id) {
         for (Veiculo veiculo : listaVeiculos)
             if (id == veiculo.hashCode())
                 return veiculo;
@@ -157,7 +158,7 @@ public class FicharioVeiculo implements Fichario {
     }
 
     public void relatorio() {
-
+        System.out.println("----------------");
         for (Veiculo veiculo : listaVeiculos) {
             System.out.println(veiculo);
             System.out.println("----------------");

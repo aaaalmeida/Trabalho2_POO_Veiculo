@@ -1,5 +1,5 @@
 import trabalho2_POO_VEICULO.*;
-
+import java.util.Objects;
 public class Cliente {
     private String nome;
     private String telefone;

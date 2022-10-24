@@ -1,5 +1,4 @@
 import trabalho2_POO_VEICULO.*;
-
 public class Carro extends Veiculo {
     private int qtdPortas;
 

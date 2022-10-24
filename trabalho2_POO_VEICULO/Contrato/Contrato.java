@@ -40,6 +40,10 @@ public abstract class Contrato {
                     case VENDA -> "VENDA";
                     case ALUGUEL -> "ALUGUEL";
                 };
+
     }
 
+    public TipoContrato getTipoContrato() {
+        return tipoContrato;
+    }
 }

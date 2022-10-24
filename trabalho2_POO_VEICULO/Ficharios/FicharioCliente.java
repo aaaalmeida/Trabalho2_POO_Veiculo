@@ -15,6 +15,7 @@ public class FicharioCliente implements Fichario {
     public void adiciona() {
         String _nome, _telefone, _CPF;
 
+        scanner.skip("\n");
         System.out.println("\nDigite o nome do cliente: ");
         _nome = scanner.nextLine();
         System.out.println("Digite o telefone do cliente: ");
@@ -46,7 +47,7 @@ public class FicharioCliente implements Fichario {
 
     public void consulta() {
         int resp;
-        System.out.println("\nBuscar cliente por [1]INDICE, [2] CPF ou [3]IDENTIFICADOR? ");
+        System.out.println("\nBuscar Cliente por [1]INDICE, [2] CPF ou [3]IDENTIFICADOR? ");
         resp = scanner.nextInt();
         Cliente cliente = null;
 
@@ -59,13 +60,22 @@ public class FicharioCliente implements Fichario {
                     cliente = listaClientes.get(num);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("INDICE NÃO EXISTE");
+                    return;
                 }
                 break;
+
             case 2:
-                cliente = buscaCPF();
+                System.out.println("Digite o CPF do Cliente: ");
+                String cpf;
+                cpf = scanner.nextLine();
+                cliente = buscaCPF(cpf);
                 break;
+
             default:
-                cliente = buscaIDENT();
+                System.out.println("Digite o código IDENTIFICADOR do Cliente: ");
+                int id;
+                id = scanner.nextInt();
+                cliente = buscaIDENT(id);
                 break;
         }
 
@@ -77,11 +87,7 @@ public class FicharioCliente implements Fichario {
         System.out.println("Cliente nao encontrado");
     }
 
-    public Cliente buscaCPF() {
-        System.out.println("Digite o CPF do Cliente: ");
-        String cpf;
-        cpf = scanner.nextLine();
-
+    public Cliente buscaCPF(String cpf) {
         for (Cliente cliente : listaClientes)
             if (cliente.getCPF() == cpf)
                 return cliente;
@@ -89,11 +95,7 @@ public class FicharioCliente implements Fichario {
         return null;
     }
 
-    public Cliente buscaIDENT() {
-        System.out.println("Digite o código IDENTIFICADOR do Cliente: ");
-        long id;
-        id = scanner.nextLong();
-
+    public Cliente buscaIDENT(int id) {
         for (Cliente cliente : listaClientes)
             if (cliente.hashCode() == id)
                 return cliente;
@@ -102,7 +104,7 @@ public class FicharioCliente implements Fichario {
     }
 
     public void relatorio() {
-
+        System.out.println("----------------");
         for (Cliente cliente : listaClientes) {
             System.out.println(cliente);
             System.out.println("----------------");
